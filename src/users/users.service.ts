@@ -52,6 +52,14 @@ export class UsersService {
         return users;
     }
 
+    async getUserByToken(authHeader: string) {
+        const token = authHeader.split(' ')[1];
+        const { id } = this.jwtService.decode(token);
+
+        const user = await this.findUser(id);
+        return user;
+    }
+
     async getUsersByEmail(email: string) {
         const user = await this.userRepository.findOne({where: {email}, include: { all: true }});
         return user;

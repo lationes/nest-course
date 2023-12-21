@@ -70,6 +70,14 @@ export class UsersController {
         return this.userService.getAllUsers();
     }
 
+    @ApiOperation({summary: 'Getting current user by token'})
+    @ApiResponse({ status: 200, type: User})
+    @UseGuards(AccessTokenGuard)
+    @Get('/current')
+    getUserByToken(@Headers('Authorization') authHeader: string) {
+        return this.userService.getUserByToken(authHeader);
+    }
+
     @ApiOperation({summary: 'Adding role to user'})
     @ApiResponse({ status: 200 })
     @Roles("ADMIN")

@@ -7,7 +7,7 @@ import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const PORT = process.env.PORT || 5000;
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule,{ cors: true });
 
   const config = new DocumentBuilder()
       .setTitle('Api for chat with authorization')
